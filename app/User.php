@@ -3,20 +3,34 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
+    const VERIFIED_USER = '1';
+    const UNVERIFIED_USER = '0';
+
+
+    const ADMIN_USER = 'true';
+    const REGULAR_USER = 'false';
+
+    protected $table = "users";
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+        'verified',
+        'gender',
+        'verification_token',
+        'admin'
     ];
 
     /**
@@ -25,7 +39,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -36,4 +51,63 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function workspaces()
+    {
+        return $this->hasMany(Workspace::class);
+    }
+    /**
+     * strtolower $name attribute
+     */
+    public function setNameAttribute($name)
+    {
+        $this->attributes['name'] = strtolower($name);
+    }
+
+    /**
+     * ucfirst $name
+     */
+    public function getNameAttribute($name)
+    {
+        return ucfirst($name);
+    }
+
+    /**
+     * strtolower $email attribute
+     */
+    public function setEmailAttribute($email)
+    {
+        $this->attributes['email'] = strtolower($email);
+    }
+
+    /**
+     * get $email
+     */
+    public function getEmailAttribute($email)
+    {
+        return $email;
+    }
+    /**
+     * is user verified 
+     * @return boolean true|false
+     */
+    public function isVerified()
+    {
+        return $this->verified == User::VERIFIED_USER;
+    }
+    /**
+     * is this user is admin
+     * @return boolean true|false
+     */
+    public function isAdmin()
+    {
+        return $this->admin == User::ADMIN_USER;
+    }
+    public static function generateVerificationCode()
+    {
+        return  \Illuminate\Support\Str::random(40);
+    }
+
+
 }

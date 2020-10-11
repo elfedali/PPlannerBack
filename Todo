@@ -1,0 +1,19 @@
+# PPlanner Back
+
+models : 
+   User
+   Role
+   Workspace
+   Project
+   Task
+   State { }
+   Comment
+   Attachment
+      
+
+# cmd
+php artisan make:model Role -m  
+
+# Pivotal Table  (Alphabetical order (in Many To Many relatioship ))
+php artisan make:migration create_user_workspace_table --create=user_workspace
+

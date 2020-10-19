@@ -17,9 +17,7 @@ class State extends Model
     const STATE_BLOCKED = 'STATE_BLOCKED';
 
 
-    const LEVEL_URGENT = 'LEVEL_URGENT'; 
-    const LEVEL_NOT_URGENT = 'LEVEL_NON_URGENT'; 
-
+  
     
     protected $fillable = [
         'name',

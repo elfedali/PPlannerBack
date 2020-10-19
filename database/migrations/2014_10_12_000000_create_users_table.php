@@ -25,15 +25,13 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
 
-            $table->boolean('gender');
+            $table->string('gender',10);
 
 
             $table->string('verified')->default(User::UNVERIFIED_USER);
 
             $table->string('verification_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-
-            $table->string('admin')->default(User::REGULAR_USER);
             
             $table->string('avatar')->nullable();
             $table->string('cover')->nullable();

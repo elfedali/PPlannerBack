@@ -29,10 +29,12 @@ class CreateProjectsTable extends Migration
             $table->double("budget")->default(0.00);
 
            
+            $table->unsignedBigInteger('user_id'); // belongs to
             $table->unsignedBigInteger('workspace_id'); // belongs to
 
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('workspace_id')->references('id')->on('workspaces');
         });
     }

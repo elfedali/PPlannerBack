@@ -12,9 +12,9 @@ class User extends Authenticatable
     const VERIFIED_USER = '1';
     const UNVERIFIED_USER = '0';
 
-
-    const ADMIN_USER = 'true';
-    const REGULAR_USER = 'false';
+    const GENDER_FEMALE = 'F';
+    const GENDER_MALE = 'M';
+    const GENDER_UNKNOWN = 'NAN';
 
     protected $table = "users";
     /**
@@ -23,6 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'username',
         'first_name',
         'last_name',
         'email',
@@ -30,7 +31,7 @@ class User extends Authenticatable
         'verified',
         'gender',
         'verification_token',
-        'admin'
+        'role_id'
     ];
 
     /**

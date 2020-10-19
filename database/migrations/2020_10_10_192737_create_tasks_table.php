@@ -1,6 +1,7 @@
 <?php
 
 use App\State;
+use App\Task;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -18,7 +19,7 @@ class CreateTasksTable extends Migration
             $table->bigIncrements('id');
             $table->text('body');
 
-            $table->string('level')->default(State::LEVEL_NOT_URGENT); 
+            $table->string('level')->default(Task::LEVEL_NOT_URGENT); 
             
             $table->unsignedBigInteger('state_id');
             $table->unsignedBigInteger('project_id');

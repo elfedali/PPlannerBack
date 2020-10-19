@@ -20,4 +20,8 @@ class Workspace extends Model
     {
         return $this->hasMany(User::class);
     }
+    public function members()
+    {
+        return $this->hasMany(User::class);
+    }
 }
